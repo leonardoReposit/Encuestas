@@ -1,0 +1,14 @@
+.resultados-container { max-width: 650px; }
+.back { display: inline-block; color: #888; text-decoration: none; font-size: 14px; margin-bottom: 20px; }
+.back:hover { color: #1a1a2e; }
+.resultados-card { background: #fff; border-radius: 16px; padding: 40px; box-shadow: 0 10px 40px rgba(0,0,0,0.08); border: 1px solid #eee; }
+.resultados-card h2 { margin: 0 0 4px; font-size: 1.4em; color: #1a1a2e; }
+.total-votos { color: #888; margin: 0 0 28px; font-size: 14px; }
+.resultados-list { display: flex; flex-direction: column; gap: 20px; }
+.resultado-item { }
+.resultado-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px; }
+.opcion-label { font-weight: 600; color: #333; font-size: 15px; }
+.opcion-stats { color: #888; font-size: 13px; }
+.barra-track { height: 32px; background: #f0f0f0; border-radius: 8px; overflow: hidden; }
+.barra-fill { height: 100%; background: linear-gradient(90deg, #1a1a2e, #e94560); border-radius: 8px; transition: width 0.4s ease; min-width: 4px; }
+.empty-card { background: #fff; border-radius: 16px; padding: 60px; text-align: center; color: #999; box-shadow: 0 10px 40px rgba(0,0,0,0.08); border: 1px solid #eee; }

@@ -1,0 +1,39 @@
+<div class="list-container">
+  <div class="list-header">
+    <h2>Encuestas</h2>
+    <div class="filtro">
+      <select [(ngModel)]="filtro" (change)="cargar()">
+        <option value="">Todas</option>
+        <option value="activa">Activas</option>
+        <option value="borrador">Borradores</option>
+        <option value="finalizada">Finalizadas</option>
+      </select>
+    </div>
+  </div>
+
+  @if (encuestas.length > 0) {
+    <div class="grid">
+      @for (e of encuestas; track e.id) {
+        <div class="card">
+          <div class="card-top">
+            <span class="estado-badge" [class]="'estado-' + e.estado">{{ e.estado }}</span>
+          </div>
+          <div class="card-body">
+            <h3>{{ e.titulo }}</h3>
+            <p>{{ e.descripcion }}</p>
+          </div>
+          <div class="card-actions">
+            <a [routerLink]="['/encuestas', e.id]" class="btn-card">Ver detalle</a>
+            @if (isAdmin) {
+              <button (click)="eliminar(e)" class="btn-card btn-eliminar-card">Eliminar</button>
+            }
+          </div>
+        </div>
+      }
+    </div>
+  } @else {
+    <div class="empty">
+      <p>No hay encuestas disponibles.</p>
+    </div>
+  }
+</div>

@@ -1,0 +1,15 @@
+.navbar { background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%); padding: 0; box-shadow: 0 2px 10px rgba(0,0,0,0.2); position: sticky; top: 0; z-index: 100; }
+.nav-inner { max-width: 1100px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; padding: 14px 24px; }
+.brand { color: #fff; text-decoration: none; font-size: 1.3em; font-weight: 800; letter-spacing: -0.5px; }
+.nav-links { display: flex; align-items: center; gap: 12px; }
+.user-info { display: flex; align-items: center; gap: 8px; color: #ccc; font-size: 14px; }
+.user-name { color: #fff; font-weight: 600; }
+.rol-badge { padding: 2px 10px; border-radius: 20px; font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px; background: #2d2d5e; color: #aaa; }
+.rol-badge.admin { background: #e94560; color: #fff; }
+.btn-nav { padding: 8px 16px; border-radius: 8px; text-decoration: none; font-size: 13px; font-weight: 600; color: #fff; background: rgba(255,255,255,0.1); transition: all 0.2s; }
+.btn-nav:hover { background: rgba(255,255,255,0.2); }
+.btn-nav.register { background: #e94560; }
+.btn-nav.register:hover { background: #d63851; }
+.btn-nav.logout { background: transparent; border: 1px solid rgba(255,255,255,0.3); }
+.btn-nav.logout:hover { border-color: #e94560; color: #e94560; }
+.main-content { max-width: 1100px; margin: 0 auto; padding: 30px 24px; }

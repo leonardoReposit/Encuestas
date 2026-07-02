@@ -1,0 +1,55 @@
+spring:
+  application:
+    name: votaciones-api
+
+  # ── Configuración de Base de Datos ───────────────────────
+  datasource:
+    url: ${SPRING_DATASOURCE_URL:jdbc:postgresql://ep-young-bread-ai7gtncw-pooler.c-4.us-east-1.aws.neon.tech/neondb?sslmode=require}
+    username: ${SPRING_DATASOURCE_USERNAME:neondb_owner}
+    password: ${SPRING_DATASOURCE_PASSWORD:npg_sTmS57DUpHxz}
+    driver-class-name: org.postgresql.Driver
+    hikari:
+      pool-name: VotacionesPool
+      maximum-pool-size: 20
+      minimum-idle: 5
+      connection-timeout: 30000
+      idle-timeout: 600000
+      max-lifetime: 1800000
+      connection-test-query: SELECT 1
+
+  # ── Configuración de JPA / Hibernate ─────────────────────
+  jpa:
+    database-platform: org.hibernate.dialect.PostgreSQLDialect
+    hibernate:
+      ddl-auto: validate
+    show-sql: true
+    properties:
+      hibernate:
+        format_sql: true
+
+  # ── Migraciones Flyway ───────────────────────────────────
+  flyway:
+    enabled: true
+    locations: classpath:db/migration
+    baseline-on-migrate: true
+    validate-on-migrate: false
+
+# ── JWT ───────────────────────────────────────────────────
+jwt:
+  secret: dW5hc2VuYWxzdXBlcnNlY3JldGF5bGFyZ2FjYW1iaWFtZWRlc3B1ZXNjaWJlcnRlYzIwMjY=
+  expiration-ms: ${JWT_EXPIRATION_MS:86400000}
+
+# ── Servidor ──────────────────────────────────────────────
+server:
+  port: ${PORT:8080}
+  error:
+    include-stacktrace: never
+    include-message: always
+
+# ── Logging ───────────────────────────────────────────────
+logging:
+  level:
+    root: INFO
+    cibertec.edu: DEBUG
+    org.springframework.security: DEBUG
+    org.springframework.web.socket: DEBUG

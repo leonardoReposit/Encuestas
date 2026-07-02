@@ -1,0 +1,88 @@
+<div class="detail-container">
+  <a routerLink="/" class="back">← Volver a encuestas</a>
+
+  @if (encuesta) {
+    <div class="header">
+      <div>
+        <h2>{{ encuesta.titulo }}</h2>
+        @if (encuesta.descripcion) {
+          <p class="descripcion">{{ encuesta.descripcion }}</p>
+        }
+      </div>
+      <div class="header-actions">
+        <span class="estado-badge" [class]="'estado-' + encuesta.estado">{{ encuesta.estado }}</span>
+      </div>
+    </div>
+
+    <h3 class="section-title">Opciones de voto</h3>
+
+    @if (opciones.length > 0) {
+      <div class="opciones">
+        @for (o of opciones; track o.id) {
+          <div class="opcion-card">
+            <div class="opcion-info">
+              <span class="opcion-num">{{ o.orden + 1 }}</span>
+              <span class="opcion-texto">{{ o.texto }}</span>
+            </div>
+            @if (esActiva && isLoggedIn && !isAdmin) {
+              <button (click)="votar(o.id)" class="btn-votar">Votar</button>
+            }
+          </div>
+        }
+      </div>
+    } @else {
+      <div class="empty">Esta encuesta no tiene opciones.</div>
+    }
+
+    @if (isAdmin) {
+      <div class="admin-actions">
+        @if (esBorrador) {
+          <button (click)="activar()" class="btn-admin btn-activar">Activar</button>
+        }
+        @if (esActiva) {
+          <button (click)="finalizar()" class="btn-admin btn-finalizar">Finalizar</button>
+        }
+      </div>
+    }
+
+    @if (mensaje) {
+      <div class="success-msg">{{ mensaje }}</div>
+    }
+    @if (error) {
+      <div class="error-msg">{{ error }}</div>
+    }
+
+    @if (!isLoggedIn) {
+      <div class="login-prompt">
+        <a routerLink="/login">Inicia sesión</a> para poder votar y ver resultados.
+      </div>
+    }
+
+    @if (isLoggedIn && resultados.length > 0) {
+      <div class="resultados-section">
+        <h3 class="section-title">Resultados</h3>
+        <p class="total-votos">Total de votos: <strong>{{ totalVotos }}</strong></p>
+        <div class="resultados-list">
+          @for (r of resultados; track r.opcionId) {
+            <div class="resultado-item">
+              <div class="resultado-header">
+                <span class="opcion-label">{{ r.opcionTexto }}</span>
+                <span class="opcion-stats">{{ r.totalVotos }} voto{{ r.totalVotos !== 1 ? 's' : '' }} ({{ r.porcentaje }}%)</span>
+              </div>
+              <div class="barra-track">
+                <div class="barra-fill" [style.width.%]="(r.totalVotos / maxVotos) * 100"></div>
+              </div>
+            </div>
+          }
+        </div>
+      </div>
+    }
+
+    @if (isLoggedIn && resultados.length === 0 && opciones.length > 0) {
+      <div class="resultados-section">
+        <h3 class="section-title">Resultados</h3>
+        <p class="total-votos">Aún no hay votos registrados.</p>
+      </div>
+    }
+  }
+</div>

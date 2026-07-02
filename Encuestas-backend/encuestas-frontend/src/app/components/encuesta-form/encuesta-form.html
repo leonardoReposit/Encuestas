@@ -1,0 +1,37 @@
+<div class="form-container">
+  <a routerLink="/" class="back">← Volver</a>
+  <div class="form-card">
+    <h2>Nueva Encuesta</h2>
+    <p class="subtitle">Crea una encuesta y agrega las opciones para que los usuarios voten</p>
+    <form (ngSubmit)="guardar()">
+      <div class="form-group">
+        <label for="titulo">Título</label>
+        <input id="titulo" type="text" [(ngModel)]="titulo" name="titulo" placeholder="Ej: ¿Cuál es tu lenguaje favorito?" required />
+      </div>
+      <div class="form-group">
+        <label for="descripcion">Descripción</label>
+        <textarea id="descripcion" [(ngModel)]="descripcion" name="descripcion" rows="3" placeholder="Describe de qué trata la encuesta..."></textarea>
+      </div>
+
+      <div class="form-group">
+        <label>Opciones</label>
+        <div class="opciones-list">
+          @for (op of opciones; track trackIndex($index); let i = $index) {
+            <div class="opcion-row">
+              <input type="text" [(ngModel)]="opciones[i]" [name]="'opcion_' + i" placeholder="Opción {{ i + 1 }}" class="opcion-input" />
+              @if (opciones.length > 1) {
+                <button type="button" (click)="eliminarOpcion(i)" class="btn-remove" title="Eliminar opción">×</button>
+              }
+            </div>
+          }
+        </div>
+        <button type="button" (click)="agregarOpcion()" class="btn-add">+ Agregar opción</button>
+      </div>
+
+      @if (error) {
+        <div class="error-msg">{{ error }}</div>
+      }
+      <button type="submit" class="btn-primary" [disabled]="guardando">Crear Encuesta</button>
+    </form>
+  </div>
+</div>

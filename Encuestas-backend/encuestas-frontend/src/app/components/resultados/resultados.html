@@ -1,0 +1,28 @@
+<div class="resultados-container">
+  <a routerLink="/" class="back">← Volver a encuestas</a>
+
+  @if (resultados.length > 0) {
+    <div class="resultados-card">
+      <h2>{{ resultados[0].encuestaTitulo }}</h2>
+      <p class="total-votos">Total de votos: <strong>{{ resultados.reduce((s, r) => s + r.totalVotos, 0) }}</strong></p>
+
+      <div class="resultados-list">
+        @for (r of resultados; track r.opcionId) {
+          <div class="resultado-item">
+            <div class="resultado-header">
+              <span class="opcion-label">{{ r.opcionTexto }}</span>
+              <span class="opcion-stats">{{ r.totalVotos }} voto{{ r.totalVotos !== 1 ? 's' : '' }} ({{ r.porcentaje }}%)</span>
+            </div>
+            <div class="barra-track">
+              <div class="barra-fill" [style.width.%]="(r.totalVotos / maxVotos) * 100"></div>
+            </div>
+          </div>
+        }
+      </div>
+    </div>
+  } @else {
+    <div class="empty-card">
+      <p>No hay resultados disponibles para esta encuesta.</p>
+    </div>
+  }
+</div>
